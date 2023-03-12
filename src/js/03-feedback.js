@@ -14,10 +14,10 @@ const parseDataFromLocalStorage = JSON.parse(dataFromLocalStorage);
 const emailInputEl = document.querySelector(`input[type="email"]`);
 const messageInputEl = document.querySelector(`textarea[name="message"]`);
 
-const emailUser = parseDataFromLocalStorage.email;
+const emailUser = parseDataFromLocalStorage ? parseDataFromLocalStorage.email : null;
 emailInputEl.value = emailUser ? emailUser : ``;
 
-const messageUser = parseDataFromLocalStorage.message;
+const messageUser = parseDataFromLocalStorage ? parseDataFromLocalStorage.message : null;
 messageInputEl.value = messageUser ? messageUser : ``;
 
 function setData(e) {
@@ -26,7 +26,8 @@ function setData(e) {
 }
 
 function removeData(e) {
-    console.log(parseDataFromLocalStorage);
+    e.preventDefault()
+    console.log(feedbackData);
     localStorage.removeItem(FEEDBACK_KEY);
     e.target.reset();
 }
