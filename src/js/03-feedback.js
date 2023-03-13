@@ -15,14 +15,33 @@ const emailInputEl = document.querySelector(`input[type="email"]`);
 const messageInputEl = document.querySelector(`textarea[name="message"]`);
 
 const emailUser = parseDataFromLocalStorage ? parseDataFromLocalStorage.email : null;
-emailInputEl.value = emailUser ? emailUser : ``;
+emailInputEl.value = emailUser;
 
 const messageUser = parseDataFromLocalStorage ? parseDataFromLocalStorage.message : null;
-messageInputEl.value = messageUser ? messageUser : ``;
+messageInputEl.value = messageUser;
+
+feedbackData.email = emailInputEl.value;
+feedbackData.message = messageInputEl.value;
+
+const btnSubmit = document.querySelector(`button[type="submit"]`);
+switchButton();
+
+function switchButton() {
+    const isActive1 = Boolean(emailInputEl.value); //false
+    const isActive2 = Boolean(messageInputEl.value); // false
+
+    if (isActive1 && isActive2) {    
+        btnSubmit.removeAttribute("disabled");
+    } else {
+        btnSubmit.setAttribute("disabled", "");
+    }
+}
 
 function setData(e) {
+    e.preventDefault()
     feedbackData[e.target.name] = e.target.value;
-    localStorage.setItem(FEEDBACK_KEY, JSON.stringify(feedbackData))
+    localStorage.setItem(FEEDBACK_KEY, JSON.stringify(feedbackData));
+    switchButton();
 }
 
 function removeData(e) {
@@ -30,6 +49,7 @@ function removeData(e) {
     console.log(feedbackData);
     localStorage.removeItem(FEEDBACK_KEY);
     e.target.reset();
+    btnSubmit.setAttribute("disabled", ``);
 }
 
 
