@@ -15,10 +15,10 @@ const emailInputEl = document.querySelector(`input[type="email"]`);
 const messageInputEl = document.querySelector(`textarea[name="message"]`);
 
 const emailUser = parseDataFromLocalStorage ? parseDataFromLocalStorage.email : null;
-emailInputEl.value = emailUser;
+emailInputEl.value = emailUser ? emailUser : ``;
 
 const messageUser = parseDataFromLocalStorage ? parseDataFromLocalStorage.message : null;
-messageInputEl.value = messageUser;
+messageInputEl.value = messageUser ? messageUser : ``;
 
 feedbackData.email = emailInputEl.value;
 feedbackData.message = messageInputEl.value;
