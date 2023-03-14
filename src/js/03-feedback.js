@@ -6,7 +6,7 @@ const FEEDBACK_KEY = "feedback-form-state";
 formEl.addEventListener(`input`, throttle(setData, 500));
 formEl.addEventListener(`submit`, removeData);
 
-const feedbackData = {};
+let feedbackData = {};
 
 const dataFromLocalStorage = localStorage.getItem(FEEDBACK_KEY);
 const parseDataFromLocalStorage = JSON.parse(dataFromLocalStorage);
@@ -14,11 +14,12 @@ const parseDataFromLocalStorage = JSON.parse(dataFromLocalStorage);
 const emailInputEl = document.querySelector(`input[type="email"]`);
 const messageInputEl = document.querySelector(`textarea[name="message"]`);
 
-const emailUser = parseDataFromLocalStorage ? parseDataFromLocalStorage.email : null;
-emailInputEl.value = emailUser ? emailUser : ``;
-
-const messageUser = parseDataFromLocalStorage ? parseDataFromLocalStorage.message : null;
-messageInputEl.value = messageUser ? messageUser : ``;
+if (parseDataFromLocalStorage) {
+    emailUser = parseDataFromLocalStorage.email;
+    messageUser = parseDataFromLocalStorage.message;
+    emailInputEl.value = emailUser;
+    messageInputEl.value = messageUser;
+}
 
 feedbackData.email = emailInputEl.value;
 feedbackData.message = messageInputEl.value;
@@ -49,7 +50,7 @@ function removeData(e) {
     console.log(feedbackData);
     localStorage.removeItem(FEEDBACK_KEY);
     e.target.reset();
-    btnSubmit.setAttribute("disabled", ``);
+    feedbackData = {};
 }
 
 
