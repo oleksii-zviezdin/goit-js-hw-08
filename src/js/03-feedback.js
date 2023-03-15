@@ -19,8 +19,8 @@ if(parseDataFromLocalStorage) {
     messageInputEl.value = parseDataFromLocalStorage[messageInputEl.name];
 }
 
-feedbackData.email = emailInputEl.value;
-feedbackData.message = messageInputEl.value;
+feedbackData.email = emailInputEl ? emailInputEl.value : ``;
+feedbackData.message = messageInputEl ? messageInputEl.value : ``;
 
 const btnSubmit = document.querySelector(`button[type="submit"]`);
 switchButton();
