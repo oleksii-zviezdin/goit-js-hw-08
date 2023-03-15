@@ -51,6 +51,7 @@ function removeData(e) {
     localStorage.removeItem(FEEDBACK_KEY);
     e.target.reset();
     feedbackData = {};
+    switchButton();
 }
 
 
