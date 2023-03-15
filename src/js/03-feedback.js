@@ -14,11 +14,9 @@ const parseDataFromLocalStorage = JSON.parse(dataFromLocalStorage);
 const emailInputEl = document.querySelector(`input[type="email"]`);
 const messageInputEl = document.querySelector(`textarea[name="message"]`);
 
-if (parseDataFromLocalStorage) {
-    emailUser = parseDataFromLocalStorage.email;
-    messageUser = parseDataFromLocalStorage.message;
-    emailInputEl.value = emailUser;
-    messageInputEl.value = messageUser;
+if(parseDataFromLocalStorage) {
+    emailInputEl.value = parseDataFromLocalStorage[emailInputEl.name];
+    messageInputEl.value = parseDataFromLocalStorage[messageInputEl.name];
 }
 
 feedbackData.email = emailInputEl.value;
